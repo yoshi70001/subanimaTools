@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1710726496 source:c:\users\surke\documents\c proyectos\subanimatools\main.cpp
+	<iostream>
+	<opencv2\highgui\highgui.hpp>
+	<opencv2\opencv.hpp>
+	<chrono>
+	<iomanip>
+
+1710735493 source:c:\users\surke\desktop\subanimatools\main.cpp
+	<iostream>
+	<opencv2\highgui\highgui.hpp>
+	<opencv2\opencv.hpp>
+	<chrono>
+	<iomanip>
+	<filesystem>
+	<cstring>
+	<dirent.h>
+
