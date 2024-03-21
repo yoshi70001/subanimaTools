@@ -16,3 +16,14 @@
 	<cstring>
 	<dirent.h>
 
+1710902348 source:g:\tools\subnimatools\main.cpp
+	<iostream>
+	<opencv2\highgui\highgui.hpp>
+	<opencv2\opencv.hpp>
+	<opencv2/core/ocl.hpp>
+	<chrono>
+	<iomanip>
+	<filesystem>
+	<cstring>
+	<dirent.h>
+

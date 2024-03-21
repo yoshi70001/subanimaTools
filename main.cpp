@@ -48,6 +48,8 @@ int textDetector(string rutavideo)
     char* windowName2 = "original";
     namedWindow(windowName2, WINDOW_AUTOSIZE);
     int frameCounter = 0;
+    Mat maskTemporal;
+    bool oldContainText = false;
     while (1)
     {
 
@@ -62,6 +64,8 @@ int textDetector(string rutavideo)
         }
         if(frameCounter%6==0)
         {
+            bool containText = false;
+            bool imageChange = false;
             Mat frameCropped;
             frame(Rect(0, frame.rows-(frame.rows/3), frame.cols, frame.rows/3)).copyTo(frameCropped);
             resize(frameCropped,frameCropped,cv::Size(256, 64));
@@ -88,7 +92,35 @@ int textDetector(string rutavideo)
                 cv::morphologyEx(output,output,cv::MORPH_OPEN,cv::Mat::ones(3, 3, CV_64F));
                 cv::erode(output,output,cv::Mat::ones(3, 7, CV_64F),Point(-1,-1),2);
                 imshow(windowName,output);
+                if(maskTemporal.cols==0)
+                {
+                    maskTemporal = output;
+                };
 
+                vector<vector<Point>> contours;
+                vector<Vec4i> hierarchy;
+                cv::findContours(output,contours,hierarchy,RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+                for (size_t i = 0; i < contours.size(); i++)
+                {
+                    double area;
+                    area = cv::contourArea(contours[i]);
+                }
+                Mat output2;
+                cv::absdiff(maskTemporal,output,output2);
+                cv::bitwise_not(output2,output2);
+                cv::dilate(output2,output2,cv::Mat::ones(6, 15, CV_64F),Point(-1,-1),2);
+                cv::findContours(output,contours,hierarchy,RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+                for (size_t i = 0; i < contours.size(); i++)
+                {
+                    double area;
+                    area = cv::contourArea(contours[i]);
+                }
+                if(imageChange && oldContainText){
+
+                }
+
+                maskTemporal = output2;
+                oldContainText = containText;
             };
             imshow(windowName2, frameCropped);
             switch (waitKey(1))
